@@ -20,7 +20,9 @@ class UserResource extends JsonResource
             'isActive' => $this->is_active,
             'avatar' => $this->avatar ? asset('storage/users/avatar/'.$this->avatar) : NULL,
             'isVerified' => $this->is_verified,
-            'role' => $this->whenLoaded('role')->name
+            'role' => $this->whenLoaded('role', function() {
+                return $this->role->name;
+            })
         ];
     }
 }

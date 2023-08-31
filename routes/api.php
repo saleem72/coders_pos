@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\SuperAdminControoler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
@@ -74,4 +75,16 @@ Route::group([
     Route::resource('invoices', InvoiceController::class);
 });
 
+Route::get('test', function() {
+    return 'Test is ok';
+});
 
+
+
+Route::group([
+    'prefix' =>  'admin',
+    'namespace' => 'App\Http\Controllers\Api\Admin',
+    'middleware' => ['auth:sanctum', 'role:superAdmin']
+], function () { // invoicesForProduct
+    Route::post('create_user', [SuperAdminControoler::class, 'createUser']);
+});

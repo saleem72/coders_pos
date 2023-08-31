@@ -174,7 +174,7 @@ class AuthController extends Controller
         $flag = Auth::attempt(['email' => $email, 'password' => $password]);
         if ($flag) {
             $user = Auth::user();
-            $user = $user->loadMissing('role');
+            $user = $user->loadMissing('role'); // $user->loadMissing('role');
             $roles = ['create'];
             $tokenName = 'basicToken';
 
